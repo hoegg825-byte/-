@@ -2,15 +2,15 @@ class Solution {
 public:
     bool exist(vector<vector<char>>& board, string word) {
         int n = board.size(), m = board[0].size();
-        vector<vector<bool>> use;
+        vector<vector<bool>> use(n, vector<bool> (m, false));;
         vector<vector<int>> dis = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
         bool final_find  = false;
         for (int i=0; i<n; i++){
             for (int j=0; j<m; j++){
-                use.assign(n, vector<bool> (m, false));
                 use[i][j] = true;
                 if (board[i][j] == word[0]) dfs(i, j, 1, final_find, n, m, board, use, word, dis);
                 if (final_find) return true;
+                use[i][j] = false;
             }
         }
         return false;
